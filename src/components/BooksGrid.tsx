@@ -10,7 +10,7 @@ const books = [
     publisher: 'Publisher 1',
     yearPublished: 2001,
     availableCopies: 5,
-    cover_image: 'http://4.bp.blogspot.com/-tAGRaj4dm58/VARYBHb4NII/AAAAAAAAADU/41VIdeYRb3c/s1600/hobbit-unexpected-journey-ring-poster.jpg',
+    cover_image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmediacdn.nhbs.com%2Fjackets%2Fjackets_resizer_xlarge%2F15%2F155236.jpg&f=1&nofb=1&ipt=f95caad33af5934a96bc4a5a548b1f0670e7f21be65bd7c871695c43af6fcd35&ipo=images",
     bookDetails: {
       book_details_id: 1,
       origin_country: 'Country 1',
@@ -27,7 +27,7 @@ const books = [
     publisher: 'Publisher 2',
     yearPublished: 2002,
     availableCopies: 4,
-    cover_image: 'http://4.bp.blogspot.com/-tAGRaj4dm58/VARYBHb4NII/AAAAAAAAADU/41VIdeYRb3c/s1600/hobbit-unexpected-journey-ring-poster.jpg',
+    cover_image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs2982.pcdn.co%2Fwp-content%2Fuploads%2F2019%2F06%2FThe-Cerulean-book-cover-678x1024.jpg.optimal.jpg&f=1&nofb=1&ipt=5918a9faf82dc205a2872db61217a7e21c1ccb0b0e0f232ede8d636e34b76da2&ipo=images",
     bookDetails: {
       book_details_id: 2,
       origin_country: 'Country 2',
@@ -44,7 +44,7 @@ const books = [
     publisher: 'Publisher 3',
     yearPublished: 2003,
     availableCopies: 3,
-    cover_image: 'http://4.bp.blogspot.com/-tAGRaj4dm58/VARYBHb4NII/AAAAAAAAADU/41VIdeYRb3c/s1600/hobbit-unexpected-journey-ring-poster.jpg',
+    cover_image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.indiabookstore.net%2Fbookish%2Fwp-content%2Fuploads%2F2016%2F12%2Fbest-book-covers-2016-7.jpg&f=1&nofb=1&ipt=5817f532ceb74f1774d12d1e1366ba0e4c7cfc75e90654789937daf0bd681a10&ipo=images",
     bookDetails: {
       book_details_id: 3,
       origin_country: 'Country 3',
@@ -61,7 +61,7 @@ const books = [
     publisher: 'Publisher 4',
     yearPublished: 2004,
     availableCopies: 2,
-    cover_image: 'http://4.bp.blogspot.com/-tAGRaj4dm58/VARYBHb4NII/AAAAAAAAADU/41VIdeYRb3c/s1600/hobbit-unexpected-journey-ring-poster.jpg',
+    cover_image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-us.bookshop.org%2Fingram%2F9780593358276.jpg%3Fheight%3D500%26v%3Dv2-d35f10b9693483b70f2f749f3771f61d&f=1&nofb=1&ipt=37add71fc4cf71c66d3a5f1720787110f46365310a7bb316153f3c9a4385311c&ipo=images",
     bookDetails: {
       book_details_id: 4,
       origin_country: 'Country 4',
