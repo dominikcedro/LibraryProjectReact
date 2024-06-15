@@ -1,0 +1,24 @@
+.grid-details-container {
+  display: flex;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+.grid-details-container.slide-left .grid-container {
+  width: 50%;
+}
+
+.grid-container {
+  width: 100%;
+  overflow-x: auto;
+  transition: all 0.5s ease;
+}
+
+.book-details {
+  width: 50%;
+  /* Add other styles as needed */
+}
+
+.selected {
+  background-color: #ddd; /* Or any other color */
+}

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Grid, Paper, Typography, Container } from '@mui/material';
+import './BooksGrid.css'; // Import your CSS file
 
 const books = [
   {
@@ -89,37 +90,55 @@ const books = [
   },
 ];
 
+interface Book {
+  bookId: number;
+  isbn: string;
+  title: string;
+  author: string;
+  publisher: string;
+  yearPublished: number;
+  availableCopies: number;
+  cover_image: string;
+  bookDetails: {
+    book_details_id: number;
+    origin_country: string;
+    category: string;
+    author_summary: string;
+    summary: string;
+  };
+}
 const BooksGrid = () => {
-  const booksPerRow = 12 / 2;
-  const placeholdersCount = booksPerRow - (books.length % booksPerRow);
-  const placeholders = Array.from({ length: placeholdersCount });
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+
+  const handleBookClick = (book: Book) => {
+    setSelectedBook(book);
+    setSelectedBookId(book.bookId);
+  };
 
   return (
-    <Container>
-      <Grid container spacing={2}>
-        {books.map((book) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={book.bookId}>
-            <Paper>
-              <img src={book.cover_image} alt={book.title} style={{ width: '100%' }} />
-              <Typography variant="h6" component="div" gutterBottom>
-                {book.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {book.author}
-              </Typography>
-            </Paper>
+    <div className={`grid-details-container ${selectedBook ? 'slide-left' : ''}`}>
+      <div className="grid-container">
+        <Container>
+          <Grid container spacing={2}>
+            {books.map((book) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={book.bookId} onClick={() => handleBookClick(book)}>
+                <Paper className={book.bookId === selectedBookId ? 'selected' : ''}>
+                  <img src={book.cover_image} alt={book.title} style={{ width: '100%' }} />
+                  <Typography variant="h6" component="div" gutterBottom>
+                    {book.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {book.author}
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-        {placeholders.map((_, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={`placeholder-${index}`}>
-            <Paper style={{ backgroundColor: '#f0f0f0', height: '100%' }}>
-              <div style={{ opacity: 0, height: '100%' }}>Placeholder</div>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+        </Container>
+      </div>
+      {selectedBook && (<div className="book-details"><h2>{selectedBook.title}</h2><p><strong>ISBN:</strong> {selectedBook.isbn}</p><p><strong>Author:</strong> {selectedBook.author}</p><p><strong>Publisher:</strong> {selectedBook.publisher}</p><p><strong>Year Published:</strong> {selectedBook.yearPublished}</p><p><strong>Available Copies:</strong> {selectedBook.availableCopies}</p><h3>Book Details</h3><p><strong>ID:</strong> {selectedBook.bookDetails.book_details_id}</p><p><strong>Origin Country:</strong> {selectedBook.bookDetails.origin_country}</p><p><strong>Category:</strong> {selectedBook.bookDetails.category}</p><p><strong>Author Summary:</strong> {selectedBook.bookDetails.author_summary}</p><p><strong>Summary:</strong> {selectedBook.bookDetails.summary}</p></div>)}
+    </div>
   );
 };
-
 export default BooksGrid;
