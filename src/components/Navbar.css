@@ -1,0 +1,12 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f8f9fa;
+  padding: 1rem 0;
+}
+
+.navbar a {
+  color: #333;
+  text-decoration: none;
+}
