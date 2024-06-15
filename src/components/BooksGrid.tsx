@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Grid, Paper, Typography, Container } from '@mui/material';
-import './BooksGrid.css'; // Import your CSS file
+import './BooksGrid.css';
+import TextField from "@mui/material/TextField"; // Import your CSS file
 
 const books = [
   {
@@ -107,21 +108,39 @@ interface Book {
     summary: string;
   };
 }
+// ... your books array and Book interface here ...
+
 const BooksGrid = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleBookClick = (book: Book) => {
     setSelectedBook(book);
     setSelectedBookId(book.bookId);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredBooks = books.filter(book =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={`grid-details-container ${selectedBook ? 'slide-left' : ''}`}>
       <div className="grid-container">
         <Container>
+          <TextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{ marginBottom: '20px' }}
+          />
           <Grid container spacing={2}>
-            {books.map((book) => (
+            {filteredBooks.map((book) => (
               <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={book.bookId} onClick={() => handleBookClick(book)}>
                 <Paper className={book.bookId === selectedBookId ? 'selected' : ''}>
                   <img src={book.cover_image} alt={book.title} style={{ width: '100%' }} />
@@ -137,8 +156,13 @@ const BooksGrid = () => {
           </Grid>
         </Container>
       </div>
+      {selectedBook && (
+        <div className="book-details">
       {selectedBook && (<div className="book-details"><h2>{selectedBook.title}</h2><p><strong>ISBN:</strong> {selectedBook.isbn}</p><p><strong>Author:</strong> {selectedBook.author}</p><p><strong>Publisher:</strong> {selectedBook.publisher}</p><p><strong>Year Published:</strong> {selectedBook.yearPublished}</p><p><strong>Available Copies:</strong> {selectedBook.availableCopies}</p><h3>Book Details</h3><p><strong>ID:</strong> {selectedBook.bookDetails.book_details_id}</p><p><strong>Origin Country:</strong> {selectedBook.bookDetails.origin_country}</p><p><strong>Category:</strong> {selectedBook.bookDetails.category}</p><p><strong>Author Summary:</strong> {selectedBook.bookDetails.author_summary}</p><p><strong>Summary:</strong> {selectedBook.bookDetails.summary}</p></div>)}
+        </div>
+      )}
     </div>
   );
 };
+
 export default BooksGrid;
