@@ -1,13 +1,14 @@
+// NavigationBar.tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const NavigationBar = () => {
   return (
     <div className="navbar">
-      <a className="nav-link active" aria-current="page" href="#">Home</a>
-      <a className="nav-link" href="#">Books</a>
-      <a className="nav-link" href="#">Reviews</a>
-      <a className="nav-link" href="#">Login/Logout</a>
+      <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+      <Link className="nav-link" to="/books">Books</Link>
+      <Link className="nav-link" to="/login">Login/Logout</Link>
     </div>
   );
 };
