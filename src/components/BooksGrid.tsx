@@ -114,14 +114,30 @@ const BooksGrid = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
 
   const handleBookClick = (book: Book) => {
+  if (book.bookId !== selectedBookId) {
     setSelectedBook(book);
     setSelectedBookId(book.bookId);
-  };
+  } else {
+    setSelectedBook(null);
+    setSelectedBookId(null);
+  }
+};
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleSearchFocus = () => {
+  setIsSearchFocused(true);
+  setSelectedBook(null);
+  setSelectedBookId(null);
+};
+
+  const handleSearchBlur = () => {
+    setIsSearchFocused(false);
   };
 
   const filteredBooks = books.filter(book =>
@@ -137,6 +153,8 @@ const BooksGrid = () => {
             variant="outlined"
             value={searchTerm}
             onChange={handleSearchChange}
+            onFocus={handleSearchFocus}
+            onBlur={handleSearchBlur}
             style={{ marginBottom: '20px' }}
           />
           <Grid container spacing={2}>
@@ -156,7 +174,7 @@ const BooksGrid = () => {
           </Grid>
         </Container>
       </div>
-      {selectedBook && (
+      {!isSearchFocused && selectedBook && (
         <div className="book-details">
       {selectedBook && (<div className="book-details"><h2>{selectedBook.title}</h2><p><strong>ISBN:</strong> {selectedBook.isbn}</p><p><strong>Author:</strong> {selectedBook.author}</p><p><strong>Publisher:</strong> {selectedBook.publisher}</p><p><strong>Year Published:</strong> {selectedBook.yearPublished}</p><p><strong>Available Copies:</strong> {selectedBook.availableCopies}</p><h3>Book Details</h3><p><strong>ID:</strong> {selectedBook.bookDetails.book_details_id}</p><p><strong>Origin Country:</strong> {selectedBook.bookDetails.origin_country}</p><p><strong>Category:</strong> {selectedBook.bookDetails.category}</p><p><strong>Author Summary:</strong> {selectedBook.bookDetails.author_summary}</p><p><strong>Summary:</strong> {selectedBook.bookDetails.summary}</p></div>)}
         </div>
@@ -164,5 +182,4 @@ const BooksGrid = () => {
     </div>
   );
 };
-
 export default BooksGrid;
