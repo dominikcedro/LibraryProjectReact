@@ -18,12 +18,14 @@ interface ReviewsProps {
 
 const ReviewComponent: React.FC<ReviewProps> = ({ review }) => {
   return (
-    <div style={{ display: 'flex', marginBottom: '10px' }}>
-      <div style={{ marginRight: '10px' }}>
-        <strong>Rating:</strong> {review.rating}/5
-      </div>
-      <div>
-        <strong>Review:</strong> {review.content}
+    <div className="review-item">
+      <div style={{ display: 'flex', marginBottom: '10px' }}>
+        <div style={{ marginRight: '10px' }}>
+          <strong>Rating:</strong> {review.rating}/5
+        </div>
+        <div>
+          <strong>Review:</strong> {review.content}
+        </div>
       </div>
     </div>
   );

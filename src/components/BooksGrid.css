@@ -5,31 +5,29 @@
 }
 
 .grid-details-container.slide-left .grid-container {
-  width: 50%;
+  width: 80%; /* Adjust this to change the width of the books grid when a book is selected */
 }
 
 .grid-container {
   width: 100%;
   overflow-x: auto;
   transition: all 0.5s ease;
+  display: grid;
+  grid-template-rows: auto auto; /* Creates two rows */
+  gap: 20px;
 }
 
 .book-details {
-  width: 50%;
+  width: 20%; /* Adjust this to change the width of the book details section */
   /* Add other styles as needed */
 }
+
+/* ... other styles ... */
 
 .selected {
   background-color: #ddd !important; /* Or any other color */
 }
 
-.book-details {
-  width: 50%;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background-color: #ffffff;
-}
 
 .book-details h2 {
   margin-bottom: 20px;
@@ -43,4 +41,29 @@
 
 .book-details strong {
   color: #333; /* Or any other color */
+}
+.book-details-container {
+  /* Add your styles for the BookDetails component here */
+  background-color: #f5f5f5;
+  padding: 30px; /* Increase the padding to make the white field wider */
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.reviews-container {
+  /* Add your styles for the Reviews component here */
+  background-color: #f5f5f5;
+
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.review-item {
+  /* Add a new class for the review items */
+  background-color: #ffffff; /* Give each review item a white background */
+  padding: 10px;
+    width: 70%;
+
+  border-radius: 5px;
+  margin-bottom: 10px; /* Add some space between review items */
 }

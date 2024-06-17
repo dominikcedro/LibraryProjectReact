@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grid, Paper, Typography, Container } from '@mui/material';
 import './BooksGrid.css';
 import TextField from "@mui/material/TextField"; // Import your CSS file
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import BookDetails from './BookDetails'; // Import BookDetails from BookDetails.tsx
-
+import Reviews from './Reviews'; // Import Reviews from Reviews.tsx
 
 const books = [
   {
@@ -111,7 +111,32 @@ interface Book {
     summary: string;
   };
 }
-// ... your books array and Book interface here ...
+
+interface Review {
+  review_id: number;
+  content: string;
+  user: { user_id: number, username: string };
+  book: number;
+  rating: number;
+}
+
+const reviews: Review[] = [
+  {
+    review_id: 1,
+    content: 'Great book!',
+    user: { user_id: 1, username: 'User1' },
+    book: 1,
+    rating: 5,
+  },
+  {
+    review_id: 2,
+    content: 'Not my cup of tea.',
+    user: { user_id: 2, username: 'User2' },
+    book: 1,
+    rating: 2,
+  },
+  // Add more reviews as needed
+];
 
 const BooksGrid = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -180,9 +205,16 @@ const BooksGrid = () => {
         </Container>
       </div>
     {!isSearchFocused && selectedBook && (
-      <BookDetails book={selectedBook} />
+      <div className="grid-container">
+        <div className="book-details-container">
+          <BookDetails book={selectedBook}/>
+        </div>
+        <div className="reviews-container">
+          <Reviews reviews={reviews.filter(review => review.book === selectedBook.bookId)}/>
+        </div>
+      </div>
     )}
-  </div>
+    </div>
   );
 };
 export default BooksGrid;

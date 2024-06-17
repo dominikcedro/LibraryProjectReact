@@ -1,4 +1,9 @@
-/* BookDetails.css */
+
 .book-details {
+  width: 70%;
   text-align: left;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: #ffffff;
 }
