@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Grid, Paper, Typography, Container } from '@mui/material';
 import './BooksGrid.css';
 import TextField from "@mui/material/TextField"; // Import your CSS file
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+
 
 const books = [
   {
@@ -115,6 +117,8 @@ const BooksGrid = () => {
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
+
+  const { t, i18n } = useTranslation('global'); // Use useTranslation hook
 
   const handleBookClick = (book: Book) => {
   if (book.bookId !== selectedBookId) {

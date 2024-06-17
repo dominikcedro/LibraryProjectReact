@@ -1,8 +1,11 @@
 // HomePage.tsx
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
-  return <h1>Home Page</h1>;
+  const { t } = useTranslation('global');
+
+  return <h1>{t('homePage')}</h1>;
 };
 
 export default HomePage;
