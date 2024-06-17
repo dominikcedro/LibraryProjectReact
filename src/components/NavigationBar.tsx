@@ -8,6 +8,8 @@ const NavigationBar = () => {
     <div className="navbar">
       <Link className="nav-link active" aria-current="page" to="/">Home</Link>
       <Link className="nav-link" to="/books">Books</Link>
+        <Link className="nav-link" to="/reviews">Reviews</Link>
+
       <Link className="nav-link" to="/login">Login/Logout</Link>
     </div>
   );
