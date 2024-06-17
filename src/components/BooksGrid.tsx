@@ -3,6 +3,7 @@ import { Grid, Paper, Typography, Container } from '@mui/material';
 import './BooksGrid.css';
 import TextField from "@mui/material/TextField"; // Import your CSS file
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import BookDetails from './BookDetails'; // Import BookDetails from BookDetails.tsx
 
 
 const books = [
@@ -178,12 +179,10 @@ const BooksGrid = () => {
           </Grid>
         </Container>
       </div>
-      {!isSearchFocused && selectedBook && (
-        <div className="book-details">
-      {selectedBook && (<div className="book-details"><h2>{selectedBook.title}</h2><p><strong>ISBN:</strong> {selectedBook.isbn}</p><p><strong>Author:</strong> {selectedBook.author}</p><p><strong>Publisher:</strong> {selectedBook.publisher}</p><p><strong>Year Published:</strong> {selectedBook.yearPublished}</p><p><strong>Available Copies:</strong> {selectedBook.availableCopies}</p><h3>Book Details</h3><p><strong>ID:</strong> {selectedBook.bookDetails.book_details_id}</p><p><strong>Origin Country:</strong> {selectedBook.bookDetails.origin_country}</p><p><strong>Category:</strong> {selectedBook.bookDetails.category}</p><p><strong>Author Summary:</strong> {selectedBook.bookDetails.author_summary}</p><p><strong>Summary:</strong> {selectedBook.bookDetails.summary}</p></div>)}
-        </div>
-      )}
-    </div>
+    {!isSearchFocused && selectedBook && (
+      <BookDetails book={selectedBook} />
+    )}
+  </div>
   );
 };
 export default BooksGrid;
