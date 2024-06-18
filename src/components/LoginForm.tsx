@@ -39,11 +39,14 @@ const LoginForm = () => {
           <Formik
   initialValues={{ username: '', password: '' }}
   onSubmit={async (values) => {
-    const token = await loginUser(values.username, values.password);
-    if (token) {
-      localStorage.setItem('jwtToken', token);
-    }
-  }}
+  const response = await loginUser(values.username, values.password);
+  if (response && response.token) {
+    localStorage.setItem('jwtToken', response.token);
+    window.alert('Login successful!');
+  } else {
+    window.alert('Login failed!');
+  }
+}}
 >
             {({ getFieldProps }) => (
               <Form>
