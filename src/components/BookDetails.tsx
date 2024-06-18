@@ -11,7 +11,7 @@ interface BookDetailsProps {
     publisher: string;
     yearPublished: number;
     availableCopies: number;
-    cover_image: string;
+    coverImageUrl: string;
     bookDetails: {
       book_details_id: number;
       origin_country: string;

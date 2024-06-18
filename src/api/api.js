@@ -18,15 +18,16 @@ export const loginUser = async (username, password) => {
 };
 
 
-// api.js
-
 export const getBooks = async () => {
   try {
     const token = localStorage.getItem('jwtToken');
     const response = await instance.get('/books', {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data;
+    return response.data.map(book => ({
+      ...book,
+      coverImageUrl: book.coverImageUrl, // Ensure this line is present
+    }));
   } catch (error) {
     console.error('Error getting books', error);
     return null;
