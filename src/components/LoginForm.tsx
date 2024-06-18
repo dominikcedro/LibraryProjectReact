@@ -15,29 +15,32 @@ import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {loginUser} from '../api/api';
 import { isLoggedIn as checkIsLoggedIn } from '../api/auth';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 
 const theme = createTheme();
 
 const LoginForm = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();  // Get the navigate function
 
     useEffect(() => {
     setIsLoggedIn(checkIsLoggedIn());
   }, []);
 
   const handleSubmit = async (values: { username: string; password: string }) => {
-    console.log('Submitting form...');  // Add this line
+    console.log('Submitting form...');
     try {
       const response = await loginUser(values.username, values.password);
-      console.log('Response received:', response);  // Add this line
+      console.log('Response received:', response);
       if (response && response.token) {
         localStorage.setItem('jwtToken', response.token);
         console.log('JWT received and stored:', response.token);
         window.alert('Login successful!');
         window.dispatchEvent(new Event('storage'));
+      navigate('/');  // Navigate to the home page
       } else {
-        console.log('Login failed: no token in response');  // Add this line
+        console.log('Login failed: no token in response');
         window.alert('Login failed!');
       }
     } catch (error) {

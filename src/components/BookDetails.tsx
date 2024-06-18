@@ -32,13 +32,18 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
       <p><strong>Year Published:</strong> {book.yearPublished}</p>
       <p><strong>Available Copies:</strong> {book.availableCopies}</p>
       <h3>Book Details</h3>
-      <p><strong>ID:</strong> {book.bookDetails.book_details_id}</p>
-      <p><strong>Origin Country:</strong> {book.bookDetails.origin_country}</p>
-      <p><strong>Category:</strong> {book.bookDetails.category}</p>
-      <p><strong>Author Summary:</strong> {book.bookDetails.author_summary}</p>
-      <p><strong>Summary:</strong> {book.bookDetails.summary}</p>
+      {book.bookDetails ? (
+        <>
+          <p><strong>ID:</strong> {book.bookDetails.book_details_id}</p>
+          <p><strong>Origin Country:</strong> {book.bookDetails.origin_country}</p>
+          <p><strong>Category:</strong> {book.bookDetails.category}</p>
+          <p><strong>Author Summary:</strong> {book.bookDetails.author_summary}</p>
+          <p><strong>Summary:</strong> {book.bookDetails.summary}</p>
+        </>
+      ) : (
+        <p>No details available for this book.</p>
+      )}
     </div>
   );
 };
-
 export default BookDetails;
