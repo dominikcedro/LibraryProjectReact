@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField"; // Import your CSS file
 import {useTranslation} from 'react-i18next'; // Import useTranslation hook
 import BookDetails from './BookDetails'; // Import BookDetails from BookDetails.tsx
 import Reviews from './Reviews'; // Import Reviews from Reviews.tsx
-import {getBooks, getReviewsForBook} from '../api/api';
+import {createLoan, getBooks, getReviewsForBook} from '../api/api';
 
 
 interface Book {
@@ -89,6 +89,10 @@ const BooksGrid = () => {
   }
 };
 
+    // Add this function inside the BooksGrid component
+
+// Add this button inside the return statement of the BooksGrid component, under
+
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
@@ -102,6 +106,19 @@ const BooksGrid = () => {
     const handleSearchBlur = () => {
         setIsSearchFocused(false);
     };
+
+    const handleLoanClick = async () => {
+  if (selectedBook) {
+    const userId = localStorage.getItem('userId');
+
+    const loan = await createLoan(selectedBook.bookId);
+    if (loan) {
+      alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
+    } else {
+      alert('Error creating loan');
+    }
+  }
+};
 
     return (
         <div className={`grid-details-container ${selectedBook ? 'slide-left' : ''}`}>
@@ -129,6 +146,8 @@ const BooksGrid = () => {
                                         <Typography variant="body2" color="text.secondary">
                                             {book.author}
                                         </Typography>
+                                        <button onClick={handleLoanClick}>Loan Book</button>
+
                                     </Paper>
                                 ) : (
                                     <div className="shadow-book"></div>
@@ -146,6 +165,8 @@ const BooksGrid = () => {
                     <div className="reviews-container">
                         <Reviews reviews={reviews}/></div>
                 </div>
+
+
             )}
         </div>
     );
