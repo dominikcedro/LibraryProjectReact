@@ -33,3 +33,18 @@ export const getBooks = async () => {
     return null;
   }
 };
+
+
+// api.js
+export const getReviewsForBook = async (bookId) => {
+  try {
+    const token = localStorage.getItem('jwtToken');
+    const response = await instance.get(`/reviews/book/${bookId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error getting reviews for book ${bookId}`, error);
+    return null;
+  }
+};

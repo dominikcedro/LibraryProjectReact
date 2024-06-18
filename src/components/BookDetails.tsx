@@ -2,6 +2,7 @@
 import React from 'react';
 import './BookDetails.css'; // Import the CSS file
 
+
 interface BookDetailsProps {
   book: {
     bookId: number;

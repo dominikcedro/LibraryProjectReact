@@ -1,10 +1,11 @@
 import React from "react";
 
+// Reviews.tsx
 interface Review {
   review_id: number;
   content: string;
-  user: { user_id: number; username: string; };
-  book: number;
+  user: { user_id: number, username: string };
+  book: { bookId: number };
   rating: number;
 }
 
@@ -26,12 +27,16 @@ const ReviewComponent: React.FC<ReviewProps> = ({ review }) => {
         <div>
           <strong>Review:</strong> {review.content}
         </div>
+        <div>
+          <strong>User:</strong> {review.user ? review.user.username : 'N/A'}
+        </div>
       </div>
     </div>
   );
 };
 
 const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
+  console.log('Reviews prop:', reviews); // Log the reviews prop
   return (
     <div>
       {reviews.map((review: Review) => (
