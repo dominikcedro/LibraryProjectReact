@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Paper, Typography, Container} from '@mui/material';
+import {Grid, Paper, Typography, Container, MenuItem, Select} from '@mui/material';
 import './BooksGrid.css';
 import TextField from "@mui/material/TextField"; // Import your CSS file
 import {useTranslation} from 'react-i18next'; // Import useTranslation hook
 import BookDetails from './BookDetails'; // Import BookDetails from BookDetails.tsx
 import Reviews from './Reviews'; // Import Reviews from Reviews.tsx
 import {createLoan, getBooks, getReviewsForBook} from '../api/api';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
 interface Book {
     bookId: number;
@@ -42,7 +47,8 @@ const BooksGrid = () => {
     const {t, i18n} = useTranslation('global'); // Use useTranslation hook
     const [books, setBooks] = useState<Book[]>([]);
     const [reviews, setReviews] = useState<Review[]>([]);
-
+    const [open, setOpen] = useState(false);
+    const [loanDuration, setLoanDuration] = useState<number>(1);
 
     // In BooksGrid.tsx
     const fillUpBooksArray = (books: Book[]) => {
@@ -76,6 +82,8 @@ const BooksGrid = () => {
     const filledUpFilteredBooks = fillUpBooksArray(filteredBooks);
 
     const handleBookClick = async (book: Book) => {
+          console.log('handleBookClick called with book:', book);
+
   if (book.bookId !== selectedBookId) {
     setSelectedBook(book);
     setSelectedBookId(book.bookId);
@@ -94,30 +102,57 @@ const BooksGrid = () => {
 // Add this button inside the return statement of the BooksGrid component, under
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+          console.log('handleSearchChange called with event:', event);
+
         setSearchTerm(event.target.value);
     };
 
     const handleSearchFocus = () => {
+          console.log('handleSearchFocus called');
+
         setIsSearchFocused(true);
         setSelectedBook(null);
         setSelectedBookId(null);
     };
 
     const handleSearchBlur = () => {
+          console.log('handleSearchBlur called');
+
         setIsSearchFocused(false);
     };
 
-    const handleLoanClick = async () => {
-  if (selectedBook) {
-    const userId = localStorage.getItem('userId');
+    const handleOpen = () => {
+          console.log('handleOpen called');
 
-    const loan = await createLoan(selectedBook.bookId);
+  setOpen(true);
+};
+    const handleClose = () => {
+          console.log('handleClose called');
+
+  setOpen(false);
+};
+
+    const handleLoanClick = () => {
+          console.log('handleLoanClick called');
+
+  if (selectedBook) {
+    handleOpen();
+  }
+};
+  const handleConfirmLoan = async (months: number) => {
+  console.log('handleConfirmLoan called with months:', months);
+  const userId = localStorage.getItem('userId');
+
+  if (selectedBook && userId) {
+    const loan = await createLoan(userId, selectedBook.bookId, months);
     if (loan) {
       alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
     } else {
       alert('Error creating loan');
     }
   }
+
+  handleClose();
 };
 
     return (
@@ -165,10 +200,29 @@ const BooksGrid = () => {
                     <div className="reviews-container">
                         <Reviews reviews={reviews}/></div>
                 </div>
-
-
             )}
+            <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Choose Loan Duration</DialogTitle>
+      <DialogContent>
+  <DialogContentText>
+    Please choose the loan duration for the book.
+  </DialogContentText>
+  <Select
+    value={loanDuration}
+    onChange={(event) => setLoanDuration(event.target.value as number)}
+  >
+    <MenuItem value={1}>1 Month</MenuItem>
+    <MenuItem value={2}>2 Months</MenuItem>
+    <MenuItem value={3}>3 Months</MenuItem>
+  </Select>
+</DialogContent>
+      <DialogActions>
+          <Button onClick={() => handleConfirmLoan(loanDuration)}>Accept</Button>
+        <Button onClick={handleClose}>Cancel</Button>
+      </DialogActions>
+    </Dialog>
         </div>
+
     );
 };
 export default BooksGrid;

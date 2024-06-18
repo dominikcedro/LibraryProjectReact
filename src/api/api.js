@@ -43,6 +43,40 @@ export const getBooks = async () => {
   }
 };
 
+export const createLoan = async (userId, bookId, months) => {
+  try {
+    const token = localStorage.getItem('jwtToken');
+
+    const loanDate = new Date();
+    const returnDate = new Date();
+    returnDate.setMonth(returnDate.getMonth() + months);
+
+    const requestBody = {
+      userId,
+      bookId,
+      loanDate: loanDate.toISOString(),
+      returnDate: returnDate.toISOString(),
+    };
+
+    console.log('Sending request with body:', requestBody); // Log the request body
+
+    const response = await instance.post('/loans', requestBody, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.status === 200) {
+      console.log('Loan created successfully');
+    } else {
+      console.log('Failed to create loan, status code:', response.status);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error creating loan', error);
+    return null;
+  }
+};
+
 
 // api.js
 export const getReviewsForBook = async (bookId) => {
@@ -54,33 +88,6 @@ export const getReviewsForBook = async (bookId) => {
     return response.data;
   } catch (error) {
     console.error(`Error getting reviews for book ${bookId}`, error);
-    return null;
-  }
-};
-
-//loans
-
-export const createLoan = async (bookId) => {
-  try {
-    const token = localStorage.getItem('jwtToken');
-    const userId = localStorage.getItem('userId');
-
-    const loanDate = new Date();
-    const returnDate = new Date();
-    returnDate.setMonth(returnDate.getMonth() + 3);
-
-    const response = await instance.post('/loans', {
-      userId,
-      bookId,
-      loanDate,
-      returnDate,
-    }, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error('Error creating loan', error);
     return null;
   }
 };
