@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { loginUser } from '../api/api';
 
 const theme = createTheme();
 
@@ -36,11 +37,14 @@ const LoginForm = () => {
             Sign in
           </Typography>
           <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-          >
+  initialValues={{ username: '', password: '' }}
+  onSubmit={async (values) => {
+    const token = await loginUser(values.username, values.password);
+    if (token) {
+      localStorage.setItem('jwtToken', token);
+    }
+  }}
+>
             {({ getFieldProps }) => (
               <Form>
                 <TextField
@@ -48,11 +52,10 @@ const LoginForm = () => {
   margin="normal"
   required
   fullWidth
-  id="email"
-  label="Email Address"
-  autoComplete="email"
+  id="username"
+  label="username"
   autoFocus
-  {...getFieldProps('email')}
+  {...getFieldProps('username')}
 />
 <TextField
   variant="outlined"
