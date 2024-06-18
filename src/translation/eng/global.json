@@ -2,6 +2,7 @@
   "home": "Home",
   "books": "Books",
   "reviews": "Reviews",
-  "loginLogout": "Login/Logout",
+  "login": "Login",
+  "logout": "Logout",
   "homePage": "Home Page"
 }
