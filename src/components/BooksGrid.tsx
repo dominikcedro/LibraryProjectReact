@@ -12,6 +12,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import ReviewForm from './ReviewForm';
+
 
 interface Book {
     bookId: number;
@@ -203,6 +205,8 @@ const BooksGrid = () => {
                     </div>
                     <div className="reviews-container">
                         <Reviews reviews={reviews}/></div>
+                              <ReviewForm bookId={selectedBook.bookId} />
+
                 </div>
             )}
             <Dialog open={open} onClose={handleClose}>

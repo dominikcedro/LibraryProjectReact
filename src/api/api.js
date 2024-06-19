@@ -17,7 +17,7 @@ export const loginUser = async (username, password) => {
     if (response.data) {
       const { token, userId } = response.data;
       localStorage.setItem('jwtToken', token);
-      localStorage.setItem('userId', userId.toString());
+      localStorage.setItem('userId', userId);
     }
     return response.data;
   } catch (error) {
@@ -91,3 +91,35 @@ export const getReviewsForBook = async (bookId) => {
     return null;
   }
 };
+
+// api.js
+export const createReview = async (bookId, rating, content) => {
+  try {
+    const token = localStorage.getItem('jwtToken');
+    const userId = localStorage.getItem('userId');
+    const response = await instance.post(
+      '/reviews',
+      {
+        userId,
+        bookId,
+        rating,
+        content,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    if (response.status === 200) {
+      console.log('Review created successfully');
+    } else {
+      console.log('Failed to create review, status code:', response.status);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error creating review', error);
+    return null;
+  }
+};
+
