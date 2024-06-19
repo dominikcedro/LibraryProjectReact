@@ -78,11 +78,17 @@
 
 .shadow-book {
   width: 100%; /* Adjust this value as needed */
-  height: 0;
+  height: 100%;
   padding-bottom: 150%; /* This will make the height proportional to the width */
-  background: rgba(0, 0, 0, 0.1); /* Adjust the color and opacity as needed */
+  background: rgba(1, 2, 3, 0.05); /* Adjust the alpha value to make the color lighter */
   border: 1px solid rgba(0, 0, 0, 0.2); /* Adjust the color and opacity as needed */
   position: relative;
+}
+
+.shadow-book::after {
+  content: "\A \A \A"; /* This creates three lines of invisible text */
+  white-space: pre; /* This makes the new lines take effect */
+  visibility: hidden; /* This makes the text invisible */
 }
 
 .shadow-book::before {
@@ -93,12 +99,23 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* Adjust the color and opacity as needed */
+  background: rgba(0, 0, 0, 0.05); /* Adjust the alpha value to make the color lighter */
   border: 1px solid rgba(0, 0, 0, 0.2); /* Adjust the color and opacity as needed */
 }
 
-.shadow-book::after {
-  content: "\A \A \A"; /* This creates three lines of invisible text */
-  white-space: pre; /* This makes the new lines take effect */
-  visibility: hidden; /* This makes the text invisible */
+
+
+
+.image-container {
+  height: 250px; /* Adjust this value as needed */
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-container {
+  /* Add styles as needed */
 }
