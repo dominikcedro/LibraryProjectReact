@@ -5,7 +5,7 @@
   "myShelf": "Moja półka",
   "login": "Zaloguj się",
   "logout": "Wyloguj się",
-  "booksgrid.dialog.choose_duration": "Proszę wybrać czas trwania wypożyczenia.",
+  "booksgrid.dialog.choose_duration": "Proszę wybrać czas trwania pożyczki.",
   "booksgrid.dialog.choose_duration.1_month": "1 miesiąc",
   "booksgrid.dialog.choose_duration.2_month": "2 miesiące",
   "booksgrid.dialog.choose_duration.3_month": "3 miesiące",
@@ -24,5 +24,12 @@
   "book_details.no_details_avaible": "Brak dostępnych szczegółów",
   "reviews.rating": "Ocena",
   "reviews.review": "Recenzja",
-  "reviews.user": "Użytkownik"
+  "reviews.user": "Użytkownik",
+  "my_shelf.author" : "Autor",
+  "my_shelf.title" : "Tytuł",
+  "my_shelf.isbn" : "ISBN",
+  "my_shelf.loan_date" : "Data wypożyczenia",
+  "my_shelf.return_date" : "Data zwrotu",
+  "my_shelf.return" : "Zwróć",
+  "my_shelf.extend" : "Przedłuż"
 }

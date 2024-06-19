@@ -10,6 +10,8 @@ import {MenuItem, Select} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { useTranslation } from 'react-i18next';
+import TextField from "@mui/material/TextField";
+import { createReview } from '../api/api.js';
 
 type Loan = {
     id: number;
@@ -32,6 +34,15 @@ const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
 const [returnConfirmOpen, setReturnConfirmOpen] = useState(false);
 const [selectedLoanToReturn, setSelectedLoanToReturn] = useState<Loan | null>(null);
 const { t } = useTranslation('global');
+const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
+const [reviewRating, setReviewRating] = useState(0);
+const [reviewContent, setReviewContent] = useState('');
+
+const handleReturnClick = (loan: Loan) => {
+  setSelectedLoanToReturn(loan);
+  setReviewDialogOpen(true);
+};
+
 const handleClose = () => {
   setOpen(false);
 };
@@ -105,32 +116,44 @@ const handleReturnLoan = async () => {
         }
     }, []);
 
+    const handleSubmitReview = async () => {
+  if (selectedLoanToReturn) {
+    const review = await createReview(selectedLoanToReturn.bookId, reviewRating, reviewContent);
+    if (review) {
+      console.log('Review submitted successfully');
+      // Delete the loan after the review is successfully created
+      handleReturnLoan();
+    } else {
+      console.log('Error submitting review');
+    }
+  }
+
+  // Reset the review form and close the dialog
+  setReviewRating(0);
+  setReviewContent('');
+  setReviewDialogOpen(false);
+};
     return (
   <div className="my-shelf">
     {loans.map(loan => (
       <div key={loan.id} className="loan-item">
         <div className="loan-item-column">
-          <p>Title: {loan.book.title}</p>
-          <p>Author: {loan.book.author}</p>
-          <p>ISBN: {loan.book.isbn}</p>
+          <p>{t('my_shelf.title')}: {loan.book.title}</p>
+          <p>{t('my_shelf.author')}: {loan.book.author}</p>
+          <p>{t('my_shelf.isbn')}: {loan.book.isbn}</p>
         </div>
         <div className="loan-item-column">
-          <p>Loan Date: {new Date(loan.loanDate).toLocaleDateString()}</p>
-          <p>Return Date: {new Date(loan.returnDate).toLocaleDateString()}</p>
+          <p>{t('my_shelf.loan_date')}: {new Date(loan.loanDate).toLocaleDateString()}</p>
+          <p>{t('my_shelf.return_date')}: {new Date(loan.returnDate).toLocaleDateString()}</p>
         </div>
           <div className="loan-item-column">
-              <button className="loan-button" onClick={() => handleOpen(loan)}>Extend</button>
-              <button className="loan-button" onClick={() => {
-                  setSelectedLoanToReturn(loan);
-                  setReturnConfirmOpen(true);
-              }}>Return
-              </button>
-          </div>
+              <button className="loan-button" onClick={() => handleOpen(loan)}>{t('my_shelf.extend')}</button>
+<button className="loan-button" onClick={() => handleReturnClick(loan)}>{t('my_shelf.return')}</button>          </div>
       </div>
     ))}
 
       <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Choose Extension Duration</DialogTitle>
+      <DialogTitle>Choose Extension Duration</DialogTitle>
           <DialogContent>
               <DialogContentText>
                   Please choose the number of weeks to extend the loan.
@@ -156,6 +179,31 @@ const handleReturnLoan = async () => {
   <DialogActions>
     <Button onClick={handleReturnLoan}>{/* Translation */"Yes"}</Button>
     <Button onClick={() => setReturnConfirmOpen(false)}>{/* Translation */"No"}</Button>
+  </DialogActions>
+</Dialog>
+      <Dialog open={reviewDialogOpen} onClose={() => setReviewDialogOpen(false)}>
+  <DialogTitle>{t('reviews.write_review')}</DialogTitle>
+  <DialogContent>
+    <form>
+      <TextField
+        label={t('reviews.rating')}
+        type="number"
+        InputProps={{ inputProps: { min: 0, max: 5 } }}
+        value={reviewRating}
+        onChange={(event) => setReviewRating(Number(event.target.value))}
+      />
+      <TextField
+        label={t('reviews.review')}
+        multiline
+        rows={4}
+        value={reviewContent}
+        onChange={(event) => setReviewContent(event.target.value)}
+      />
+    </form>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleSubmitReview}>{t('reviews.submit')}</Button>
+    <Button onClick={() => setReviewDialogOpen(false)}>{t('reviews.cancel')}</Button>
   </DialogActions>
 </Dialog>
   </div>

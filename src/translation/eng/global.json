@@ -24,5 +24,12 @@
   "book_details.no_details_avaible": "No Details Available",
   "reviews.rating": "Rating",
   "reviews.review": "Review",
-  "reviews.user": "User"
+  "reviews.user": "User",
+  "my_shelf.author" : "Author",
+  "my_shelf.title" : "Title",
+  "my_shelf.isbn" : "ISBN",
+  "my_shelf.loan_date" : "Loan Date",
+  "my_shelf.return_date" : "Return Date",
+  "my_shelf.return" : "Return",
+  "my_shelf.extend" : "Extend"
 }
