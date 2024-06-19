@@ -1,4 +1,5 @@
 import React from "react";
+import {useTranslation} from 'react-i18next'; // Import useTranslation hook
 
 // Reviews.tsx
 interface Review {
@@ -18,17 +19,19 @@ interface ReviewsProps {
 }
 
 const ReviewComponent: React.FC<ReviewProps> = ({ review }) => {
+      const {t, i18n} = useTranslation('global'); // Use useTranslation hook
+
   return (
     <div className="review-item">
       <div style={{ display: 'flex', marginBottom: '10px' }}>
         <div style={{ marginRight: '10px' }}>
-          <strong>Rating:</strong> {review.rating}/5
+          <strong>{t('reviews.rating')}:</strong> {review.rating}/5
         </div>
         <div>
-          <strong>Review:</strong> {review.content}
+          <strong>{t('reviews.review')}:</strong> {review.content}
         </div>
         <div>
-          <strong>User:</strong> {review.user ? review.user.username : 'N/A'}
+          <strong>{t('reviews.user')}:</strong> {review.user ? review.user.username : 'N/A'}
         </div>
       </div>
     </div>

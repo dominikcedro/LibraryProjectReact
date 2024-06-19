@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import ReviewForm from './ReviewForm';
 
 
+
 interface Book {
     bookId: number;
     isbn: string;
@@ -215,20 +216,20 @@ const BooksGrid = () => {
             <DialogTitle>Choose Loan Duration</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please choose the loan duration for the book.
+                        {t('booksgrid.dialog.choose_duration')}
                     </DialogContentText>
                     <Select
                         value={loanDuration}
                         onChange={(event) => setLoanDuration(event.target.value as number)}
                     >
-                        <MenuItem value={1}>1 Month</MenuItem>
-                        <MenuItem value={2}>2 Months</MenuItem>
-                        <MenuItem value={3}>3 Months</MenuItem>
+                        <MenuItem value={1}>{t('booksgrid.dialog.choose_duration.1_month')}</MenuItem>
+                        <MenuItem value={2}>{t('booksgrid.dialog.choose_duration.2_month')}</MenuItem>
+                        <MenuItem value={3}>{t('booksgrid.dialog.choose_duration.3_month')}</MenuItem>
                     </Select>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => handleConfirmLoan(loanDuration)}>Accept</Button>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={() => handleConfirmLoan(loanDuration)}>{t('booksgrid.dialog.choose_duration.accept')}</Button>
+                    <Button onClick={handleClose}>{t('booksgrid.dialog.choose_duration.decline')}</Button>
                 </DialogActions>
             </Dialog>
         </div>

@@ -46,7 +46,6 @@ const NavigationBar = () => {
     <div className="navbar">
       <Link className="nav-link active" aria-current="page" to="/">{t('home')}</Link>
       <Link className="nav-link" to="/books">{t('books')}</Link>
-      <Link className="nav-link" to="/reviews">{t('reviews')}</Link>
         <Link className="nav-link" to="/my-shelf">{t('myShelf')}</Link> {/* Add this line */}
 
 <Link className="nav-link" to="/login" onClick={(e) => { if (isLoggedIn) { e.preventDefault(); logout(); } }}>{isLoggedIn ? t('logout') : t('login')}</Link>        <select value={language} onChange={changeLanguage}>

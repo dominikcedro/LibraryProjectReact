@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import {MenuItem, Select} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import { useTranslation } from 'react-i18next';
 
 type Loan = {
     id: number;
@@ -28,7 +29,9 @@ const MyShelf = () => {
     const [extensionWeeks, setExtensionWeeks] = useState<number>(1);
     const [open, setOpen] = useState(false);
 const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
-
+const [returnConfirmOpen, setReturnConfirmOpen] = useState(false);
+const [selectedLoanToReturn, setSelectedLoanToReturn] = useState<Loan | null>(null);
+const { t } = useTranslation('global');
 const handleClose = () => {
   setOpen(false);
 };
@@ -62,6 +65,24 @@ const handleExtendLoan = async (weeks: number) => {
   }
 
   handleClose();
+};
+
+const handleReturnLoan = async () => {
+  console.log('handleReturnLoan called');
+
+  if (selectedLoanToReturn) {
+    const response = await axios.delete(`http://localhost:8080/loans/${selectedLoanToReturn.id}`);
+
+    if (response.status === 200) {
+      alert('Loan returned successfully');
+      // Update the loans state to remove the returned loan
+      setLoans(loans.filter(loan => loan.id !== selectedLoanToReturn.id));
+    } else {
+      alert('Error returning loan');
+    }
+  }
+
+  setReturnConfirmOpen(false);
 };
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -97,20 +118,24 @@ const handleExtendLoan = async (weeks: number) => {
           <p>Loan Date: {new Date(loan.loanDate).toLocaleDateString()}</p>
           <p>Return Date: {new Date(loan.returnDate).toLocaleDateString()}</p>
         </div>
-        <div className="loan-item-column">
-          <button className="loan-button" onClick={() => handleOpen(loan)}>Extend</button>
-          <button className="loan-button">Return</button>
-        </div>
+          <div className="loan-item-column">
+              <button className="loan-button" onClick={() => handleOpen(loan)}>Extend</button>
+              <button className="loan-button" onClick={() => {
+                  setSelectedLoanToReturn(loan);
+                  setReturnConfirmOpen(true);
+              }}>Return
+              </button>
+          </div>
       </div>
     ))}
 
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Choose Extension Duration</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Please choose the number of weeks to extend the loan.
-        </DialogContentText>
-        <Select
+      <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Choose Extension Duration</DialogTitle>
+          <DialogContent>
+              <DialogContentText>
+                  Please choose the number of weeks to extend the loan.
+              </DialogContentText>
+              <Select
           value={extensionWeeks}
           onChange={(event) => setExtensionWeeks(event.target.value as number)}
         >
@@ -125,6 +150,14 @@ const handleExtendLoan = async (weeks: number) => {
         <Button onClick={handleClose}>Cancel</Button>
       </DialogActions>
     </Dialog>
+
+      <Dialog open={returnConfirmOpen} onClose={() => setReturnConfirmOpen(false)}>
+  <DialogTitle>{/* Translation */"Please confirm you are returning the book"}</DialogTitle>
+  <DialogActions>
+    <Button onClick={handleReturnLoan}>{/* Translation */"Yes"}</Button>
+    <Button onClick={() => setReturnConfirmOpen(false)}>{/* Translation */"No"}</Button>
+  </DialogActions>
+</Dialog>
   </div>
 );
 
