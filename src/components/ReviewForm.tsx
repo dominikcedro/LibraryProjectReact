@@ -4,6 +4,8 @@ import { Button, LinearProgress, MenuItem } from '@mui/material';
 import { TextField } from 'formik-material-ui';
 import * as yup from 'yup';
 import { createReview } from '../api/api';
+import { useNavigate } from 'react-router-dom';
+
 
 const validationSchema = yup.object({
   rating: yup
@@ -27,13 +29,15 @@ const ReviewForm = ({ bookId }: ReviewFormProps) => {
     rating: 0,
     content: '',
   };
+  const navigate = useNavigate();
+
 
   interface FormValues {
     rating: number;
     content: string;
   }
 
-  const onSubmit = async (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const onSubmit = async (values: FormValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void, resetForm: () => void }) => {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
@@ -41,6 +45,9 @@ const ReviewForm = ({ bookId }: ReviewFormProps) => {
 
       if (response) {
         console.log('Review created successfully');
+        alert('Review submitted successfully!');
+        resetForm();
+        navigate('/books');
       } else {
         console.log('Failed to create review');
       }

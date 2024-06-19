@@ -102,10 +102,6 @@ const BooksGrid = () => {
         }
     };
 
-    // Add this function inside the BooksGrid component
-
-// Add this button inside the return statement of the BooksGrid component, under
-
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log('handleSearchChange called with event:', event);
 
@@ -151,9 +147,9 @@ const BooksGrid = () => {
             const loan = await createLoan(selectedBook.bookId, months);
             console.log(loan)
             if (loan) {
-                alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
+                alert(t('booksgrid.alert.loan_successful'));
             } else {
-                alert('Error creating loan');
+                alert(t('booksgrid.alert.loan_fail'));
             }
         }
 
@@ -169,9 +165,13 @@ const BooksGrid = () => {
                         variant="outlined"
                         value={searchTerm}
                         onChange={handleSearchChange}
+
                         onFocus={handleSearchFocus}
                         onBlur={handleSearchBlur}
-                        style={{marginBottom: '20px'}}
+                        style={{marginBottom: '20px',
+                            width: '50%' }}
+                          placeholder={t('booksgrid.search_placeholder')}
+
                     />
                     <Grid container spacing={2}>
                         {filledUpFilteredBooks.map((book, index) => (

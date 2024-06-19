@@ -32,5 +32,9 @@
   "my_shelf.return_date" : "Return Date",
   "my_shelf.return" : "Return",
   "my_shelf.extend" : "Extend",
-  "home_page.welcome": "Library for you"
+  "home_page.welcome": "Library for you",
+  "booksgrid.alert.loan_successful": "Book loan created",
+  "booksgrid.alert.loan_fail": "Book loan failed",
+    "booksgrid.search_placeholder": "Search"
+
 }

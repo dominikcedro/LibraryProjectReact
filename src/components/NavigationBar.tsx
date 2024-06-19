@@ -8,7 +8,8 @@ import { isLoggedIn } from '../api/auth';
 import { isLoggedIn as checkIsLoggedIn } from '../api/auth';
 
 const NavigationBar = () => {
-  const [language, setLanguage] = React.useState('pl');
+
+  const [language, setLanguage] = React.useState('eng');
   const { t, i18n } = useTranslation('global');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -51,6 +52,7 @@ const NavigationBar = () => {
 <Link className="nav-link" to="/login" onClick={(e) => { if (isLoggedIn) { e.preventDefault(); logout(); } }}>{isLoggedIn ? t('logout') : t('login')}</Link>        <select value={language} onChange={changeLanguage}>
         <option value="en">English</option>
         <option value="pl">Polski</option>
+        <option value="es">Espanol</option>
       </select>
     </div>
   );

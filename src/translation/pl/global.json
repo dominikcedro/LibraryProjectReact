@@ -15,7 +15,7 @@
   "book_details.author": "Autor",
   "book_details.publisher": "Wydawca",
   "book_details.year_published": "Rok publikacji",
-  "book_details.avaible_copies": "Dostępne kopie",
+  "book_details.avaible_copies": "Dostępne egzemplarze",
   "book_details.details": "Szczegóły",
   "book_details.origin_country": "Kraj pochodzenia",
   "book_details.category": "Kategoria",
@@ -28,8 +28,12 @@
   "my_shelf.author" : "Autor",
   "my_shelf.title" : "Tytuł",
   "my_shelf.isbn" : "ISBN",
-  "my_shelf.loan_date" : "Data wypożyczenia",
+  "my_shelf.loan_date" : "Data pożyczki",
   "my_shelf.return_date" : "Data zwrotu",
   "my_shelf.return" : "Zwróć",
-  "my_shelf.extend" : "Przedłuż"
+  "my_shelf.extend" : "Przedłuż",
+  "home_page.welcome": "Biblioteka dla Ciebie",
+  "booksgrid.alert.loan_successful": "Pożyczka książki została utworzona",
+  "booksgrid.alert.loan_fail": "Nie udało się utworzyć pożyczki książki",
+  "booksgrid.search_placeholder": "Wyszukaj"
 }
