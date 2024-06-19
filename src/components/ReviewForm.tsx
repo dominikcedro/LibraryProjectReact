@@ -57,44 +57,41 @@ const ReviewForm = ({ bookId }: ReviewFormProps) => {
       onSubmit={onSubmit}
     >
       {({ submitForm, isSubmitting }) => (
-        <Form>
-          <Field
-            component={TextField}
-            name="rating"
-            type="number"
-            label="Rating"
-            select
-            variant="standard"
-            helperText="Please select your rating"
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-          </Field>
-          <br />
-          <Field
-            component={TextField}
-            type="text"
-            label="Review"
-            name="content"
-          />
-          {isSubmitting && <LinearProgress />}
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-            onClick={submitForm}
-          >
-            Submit
-          </Button>
-        </Form>
+<Form className="review-form">
+  <div className="review-inputs">
+    <div className="rating-input">
+      <Field
+          component={TextField}
+          name="rating"
+          type="number"
+          label="Rating"
+          select
+          variant="standard"
+          helperText="Please select your rating"
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+      >
+        <MenuItem value={1}>1</MenuItem>
+        <MenuItem value={2}>2</MenuItem>
+        <MenuItem value={3}>3</MenuItem>
+        <MenuItem value={4}>4</MenuItem>
+        <MenuItem value={5}>5</MenuItem>
+      </Field>
+    </div>
+    <Field
+        component={TextField}
+        type="text"
+        label="Review"
+        name="content"
+        className="review-text"
+    />
+  </div>
+  {isSubmitting && <LinearProgress/>}
+  <br/>
+  <button className="loan-button" type="submit">Submit Review</button>
+</Form>
       )}
     </Formik>
   );

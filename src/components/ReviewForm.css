@@ -1,0 +1,23 @@
+.review-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.review-text {
+  flex-grow: 1;
+  margin-left: 20px;
+  background-color: #ffffff; /* White color */
+}
+
+.review-form {
+  background-color: #f0f0f0; /* Grey color */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+.rating-input {
+  border-right: 1px solid #000; /* Black border */
+  padding-right: 20px; /* Add some padding to separate the border from the rating input */
+}

@@ -119,3 +119,53 @@
 .text-container {
   /* Add styles as needed */
 }
+
+
+button {
+    background-color: #6ecf6e; /* Green color */
+    color: white; /* Text color */
+    border: none; /* Remove default button border */
+    padding: 10px 20px; /* Add some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove default text decoration */
+    display: inline-block;
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px;
+    cursor: pointer; /* Change cursor to pointer when hovering over the button */
+    border-radius: 12px; /* Add rounded corners */
+    transition-duration: 0.4s; /* Add animation when hovering over the button */
+}
+
+button:hover {
+    background-color: white; /* Change background color when hovering */
+    color: #0070c9; /* Change text color when hovering */
+}
+
+.review-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-text {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.review-form-container {
+  background-color: #f0f0f0; /* Grey color */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Add rounded corners */
+  margin-bottom: 20px; /* Add bottom margin */
+}
+
+.review-text {
+  flex-grow: 1;
+  margin-left: 20px;
+  padding-left: 20px;
+  background-color: #ffffff; /* White color */
+}
+
+.rating-input {
+  padding-right: 20px; /* Add some padding to separate the border from the rating input */
+}

@@ -135,27 +135,27 @@ const BooksGrid = () => {
     };
 
     const handleLoanClick = (book: Book | null) => {
-  console.log('handleLoanClick called');
-  console.log(book)
-  if (book) {
-    handleOpen();
-  }
-};
+        console.log('handleLoanClick called');
+        console.log(book)
+        if (book) {
+            handleOpen();
+        }
+    };
     const handleConfirmLoan = async (months: number) => {
-  console.log('handleConfirmLoan called with months:', months);
-console.log(selectedBook)
-  if (selectedBook) {
-    const loan = await createLoan(selectedBook.bookId, months);
-    console.log(loan)
-    if (loan) {
-      alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
-    } else {
-      alert('Error creating loan');
-    }
-  }
+        console.log('handleConfirmLoan called with months:', months);
+        console.log(selectedBook)
+        if (selectedBook) {
+            const loan = await createLoan(selectedBook.bookId, months);
+            console.log(loan)
+            if (loan) {
+                alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
+            } else {
+                alert('Error creating loan');
+            }
+        }
 
-  handleClose();
-};
+        handleClose();
+    };
 
     return (
         <div className={`grid-details-container ${selectedBook ? 'slide-left' : ''}`}>
@@ -201,16 +201,18 @@ console.log(selectedBook)
                 <div className="grid-container">
                     <div className="book-details-container">
                         <BookDetails book={selectedBook}/>
-                    <button onClick={() => handleLoanClick(selectedBook)}>Loan Book</button>
+                        <button className="loan-button" onClick={() => handleLoanClick(selectedBook)}>Loan Book</button>
                     </div>
                     <div className="reviews-container">
-                    <Reviews reviews={reviews}/></div>
-                              <ReviewForm bookId={selectedBook.bookId} />
+                        <Reviews reviews={reviews}/></div>
+                    <div className="review-form-container">
+                        <ReviewForm bookId={selectedBook.bookId}/>
+                    </div>
 
                 </div>
             )}
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Choose Loan Duration</DialogTitle>
+            <DialogTitle>Choose Loan Duration</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Please choose the loan duration for the book.
