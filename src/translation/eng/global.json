@@ -31,5 +31,6 @@
   "my_shelf.loan_date" : "Loan Date",
   "my_shelf.return_date" : "Return Date",
   "my_shelf.return" : "Return",
-  "my_shelf.extend" : "Extend"
+  "my_shelf.extend" : "Extend",
+  "home_page.welcome": "Library for you"
 }

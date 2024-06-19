@@ -124,11 +124,12 @@ const LoginForm = () => {
                                             Forgot password?
                                         </Link>
                                     </Grid>
-                                    <Grid item>
-                                        <Link href="#" variant="body2">
-                                            {"Don't have an account? Sign Up"}
-                                        </Link>
-                                    </Grid>
+                                    // In LoginForm.tsx
+<Grid item>
+  <Link href="#" variant="body2" onClick={() => navigate('/register')}>
+    {"Don't have an account? Sign Up"}
+  </Link>
+</Grid>
                                 </Grid>
                             </Form>
                         )}

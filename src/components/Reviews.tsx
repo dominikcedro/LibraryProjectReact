@@ -3,23 +3,19 @@ import {useTranslation} from 'react-i18next'; // Import useTranslation hook
 
 // Reviews.tsx
 interface Review {
-  review_id: number;
-  content: string;
-  user: { user_id: number, username: string };
-  book: { bookId: number };
-  rating: number;
-}
-
-interface ReviewProps {
-  review: Review;
+    userId: number;
+    bookId: number | null;
+    content: string;
+    rating: number;
+    userEmail: string;
 }
 
 interface ReviewsProps {
   reviews: Review[];
 }
 
-const ReviewComponent: React.FC<ReviewProps> = ({ review }) => {
-      const {t, i18n} = useTranslation('global'); // Use useTranslation hook
+const ReviewComponent: React.FC<{ review: Review }> = ({ review }) => {
+  const {t, i18n} = useTranslation('global'); // Use useTranslation hook
 
   return (
     <div className="review-item">
@@ -27,11 +23,11 @@ const ReviewComponent: React.FC<ReviewProps> = ({ review }) => {
         <div style={{ marginRight: '10px' }}>
           <strong>{t('reviews.rating')}:</strong> {review.rating}/5
         </div>
-        <div>
+        <div style={{ marginRight: '10px' }}>
           <strong>{t('reviews.review')}:</strong> {review.content}
         </div>
         <div>
-          <strong>{t('reviews.user')}:</strong> {review.user ? review.user.username : 'N/A'}
+          <strong>{t('reviews.user')}:</strong> {review.userEmail}
         </div>
       </div>
     </div>
@@ -43,7 +39,7 @@ const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
   return (
     <div>
       {reviews.map((review: Review) => (
-        <ReviewComponent key={review.review_id} review={review} />
+        <ReviewComponent key={review.userId} review={review} />
       ))}
     </div>
   );

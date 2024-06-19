@@ -12,6 +12,9 @@ import Button from "@mui/material/Button";
 import { useTranslation } from 'react-i18next';
 import TextField from "@mui/material/TextField";
 import { createReview } from '../api/api.js';
+import withAuth from './WithAuth';
+import WithAuth from "./WithAuth";
+
 
 type Loan = {
     id: number;
@@ -211,4 +214,4 @@ const handleReturnLoan = async () => {
 
 }
 
-export default MyShelf;
+export default WithAuth(MyShelf);

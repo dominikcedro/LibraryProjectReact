@@ -13,6 +13,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import ReviewForm from './ReviewForm';
+import withAuth from './WithAuth';
+
 
 
 
@@ -35,11 +37,11 @@ interface Book {
 }
 
 interface Review {
-    review_id: number;
+    userId: number;
+    bookId: number | null;
     content: string;
-    user: { user_id: number, username: string };
-    book: { bookId: number };
     rating: number;
+    userEmail: string;
 }
 
 const BooksGrid = () => {

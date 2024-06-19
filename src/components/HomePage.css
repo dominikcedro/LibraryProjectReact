@@ -1,0 +1,37 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.designlike.com%2Fwp-content%2Fuploads%2F2021%2F02%2Fstuttgart-5739702_1920.jpg%3Fis-pending-load%3D1&f=1&nofb=1&ipt=7c17d2ce5bef86ef60fbe8ab2374408cd60ab355e52e8bebf800d90c882e2680&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.library-text {
+  color: #6ecf6e;
+  font-size: 10em;
+  margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.time {
+  color: white;
+  font-family: 'Helvetica Neue';
+  font-size: 24px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
