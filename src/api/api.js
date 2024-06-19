@@ -43,9 +43,10 @@ export const getBooks = async () => {
   }
 };
 
-export const createLoan = async (userId, bookId, months) => {
+export const createLoan = async (bookId, months) => {
   try {
     const token = localStorage.getItem('jwtToken');
+    const userId = localStorage.getItem('userId');
 
     const loanDate = new Date();
     const returnDate = new Date();

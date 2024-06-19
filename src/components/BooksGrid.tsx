@@ -134,28 +134,28 @@ const BooksGrid = () => {
         setOpen(false);
     };
 
-    const handleLoanClick = () => {
-        console.log('handleLoanClick called');
-
-        if (selectedBook) {
-            handleOpen();
-        }
-    };
+    const handleLoanClick = (book: Book | null) => {
+  console.log('handleLoanClick called');
+  console.log(book)
+  if (book) {
+    handleOpen();
+  }
+};
     const handleConfirmLoan = async (months: number) => {
-        console.log('handleConfirmLoan called with months:', months);
-        const userId = localStorage.getItem('userId');
+  console.log('handleConfirmLoan called with months:', months);
+console.log(selectedBook)
+  if (selectedBook) {
+    const loan = await createLoan(selectedBook.bookId, months);
+    console.log(loan)
+    if (loan) {
+      alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
+    } else {
+      alert('Error creating loan');
+    }
+  }
 
-        if (selectedBook && userId) {
-            const loan = await createLoan(userId, selectedBook.bookId, months);
-            if (loan) {
-                alert(`Loan created successfully. Loan start date: ${loan.loanDate}, return date: ${loan.returnDate}`);
-            } else {
-                alert('Error creating loan');
-            }
-        }
-
-        handleClose();
-    };
+  handleClose();
+};
 
     return (
         <div className={`grid-details-container ${selectedBook ? 'slide-left' : ''}`}>
@@ -188,7 +188,6 @@ const BooksGrid = () => {
                                             {book.author}
                                         </Typography>
                                     </div>
-                                    <button onClick={handleLoanClick}>Loan Book</button>
                                 </Paper>
                             ) : (
                                 <div className="shadow-book"></div>
@@ -202,9 +201,10 @@ const BooksGrid = () => {
                 <div className="grid-container">
                     <div className="book-details-container">
                         <BookDetails book={selectedBook}/>
+                    <button onClick={() => handleLoanClick(selectedBook)}>Loan Book</button>
                     </div>
                     <div className="reviews-container">
-                        <Reviews reviews={reviews}/></div>
+                    <Reviews reviews={reviews}/></div>
                               <ReviewForm bookId={selectedBook.bookId} />
 
                 </div>
