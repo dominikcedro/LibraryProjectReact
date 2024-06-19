@@ -1,0 +1,45 @@
+.loan-item {
+  background-color: #f0f0f0; /* Grey color */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Add rounded corners */
+  margin-bottom: 20px; /* Add bottom margin */
+}
+
+.loan-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loan-button {
+  background-color: #6ecf6e; /* Green color */
+  color: white; /* Text color */
+  border: none; /* Remove default button border */
+  padding: 10px 20px; /* Add some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove default text decoration */
+  display: inline-block;
+  font-size: 16px; /* Increase font size */
+  margin: 4px 2px;
+  cursor: pointer; /* Change cursor to pointer when hovering over the button */
+  border-radius: 12px; /* Add rounded corners */
+  transition-duration: 0.4s; /* Add animation when hovering over the button */
+}
+
+.loan-button:hover {
+  background-color: white; /* Change background color when hovering */
+  color: #0070c9; /* Change text color when hovering */
+}
+
+.my-shelf {
+  padding: 0 40px; /* Add horizontal padding */
+}
+
+.loan-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loan-item-column {
+  flex: 1;
+  padding: 10px;
+}

@@ -2,7 +2,7 @@
   "home": "Home",
   "books": "Books",
   "reviews": "Reviews",
+  "myShelf": "My Shelf",
   "login": "Login",
-  "logout": "Logout",
-  "homePage": "Home Page"
+  "logout": "Logout"
 }
