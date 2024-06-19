@@ -11,10 +11,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from 'react-i18next'; // Import useTranslation hook
+
 
 const theme = createTheme();
 
 const RegisterForm = () => {
+        const navigate = useNavigate();  // Get the navigate function
+        const {t, i18n} = useTranslation('global'); // Use useTranslation hook
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -27,9 +33,9 @@ const RegisterForm = () => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: '#6ecf6e' }}>
+  <LockOutlinedIcon sx={{ color: 'black' }}/>
+</Avatar>
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
@@ -84,8 +90,9 @@ const RegisterForm = () => {
                 </Button>
                 <Grid container>
                   <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Already have an account? Sign In"}
+                      <Link href="#" variant="body2" onClick={() => navigate('/login')}>
+                      {t('register.already_account')}
+
                     </Link>
                   </Grid>
                 </Grid>

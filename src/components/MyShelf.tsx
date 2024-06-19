@@ -41,6 +41,11 @@ const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
 const [reviewRating, setReviewRating] = useState(0);
 const [reviewContent, setReviewContent] = useState('');
 
+const maxBooks = 5;
+const currentBooks = loans.length;
+const meterWidth = (currentBooks / maxBooks) * 100;
+
+
 const handleReturnClick = (loan: Loan) => {
   setSelectedLoanToReturn(loan);
   setReviewDialogOpen(true);
@@ -137,81 +142,88 @@ const handleReturnLoan = async () => {
   setReviewDialogOpen(false);
 };
     return (
-  <div className="my-shelf">
-    {loans.map(loan => (
-      <div key={loan.id} className="loan-item">
-        <div className="loan-item-column">
-          <p>{t('my_shelf.title')}: {loan.book.title}</p>
-          <p>{t('my_shelf.author')}: {loan.book.author}</p>
-          <p>{t('my_shelf.isbn')}: {loan.book.isbn}</p>
-        </div>
-        <div className="loan-item-column">
-          <p>{t('my_shelf.loan_date')}: {new Date(loan.loanDate).toLocaleDateString()}</p>
-          <p>{t('my_shelf.return_date')}: {new Date(loan.returnDate).toLocaleDateString()}</p>
-        </div>
-          <div className="loan-item-column">
-              <button className="loan-button" onClick={() => handleOpen(loan)}>{t('my_shelf.extend')}</button>
-<button className="loan-button" onClick={() => handleReturnClick(loan)}>{t('my_shelf.return')}</button>          </div>
-      </div>
-    ))}
+        <div className="my-shelf">
+            <div className="meter">
+                <div className="meter-fill" style={{width: `${meterWidth}%`}}/>
+                <div className="meter-text">Your loan limit</div>
 
-      <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Choose Extension Duration</DialogTitle>
-          <DialogContent>
-              <DialogContentText>
-                  Please choose the number of weeks to extend the loan.
-              </DialogContentText>
-              <Select
-          value={extensionWeeks}
-          onChange={(event) => setExtensionWeeks(event.target.value as number)}
-        >
-          <MenuItem value={1}>1 Week</MenuItem>
-          <MenuItem value={2}>2 Weeks</MenuItem>
-          <MenuItem value={3}>3 Weeks</MenuItem>
-          <MenuItem value={4}>4 Weeks</MenuItem>
-        </Select>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => handleExtendLoan(extensionWeeks)}>Extend Loan</Button>
-        <Button onClick={handleClose}>Cancel</Button>
-      </DialogActions>
-    </Dialog>
+            </div>
+            {loans.map(loan => (
+                <div key={loan.id} className="loan-item">
+                    <div className="loan-item-column">
+                        <p>{t('my_shelf.title')}: {loan.book.title}</p>
+                        <p>{t('my_shelf.author')}: {loan.book.author}</p>
+                        <p>{t('my_shelf.isbn')}: {loan.book.isbn}</p>
+                    </div>
+                    <div className="loan-item-column">
+                        <p>{t('my_shelf.loan_date')}: {new Date(loan.loanDate).toLocaleDateString()}</p>
+                        <p>{t('my_shelf.return_date')}: {new Date(loan.returnDate).toLocaleDateString()}</p>
+                    </div>
+                    <div className="loan-item-column">
+                        <button className="loan-button" onClick={() => handleOpen(loan)}>{t('my_shelf.extend')}</button>
+                        <button className="loan-button"
+                                onClick={() => handleReturnClick(loan)}>{t('my_shelf.return')}</button>
+                    </div>
+                </div>
+            ))}
 
-      <Dialog open={returnConfirmOpen} onClose={() => setReturnConfirmOpen(false)}>
-  <DialogTitle>{/* Translation */"Please confirm you are returning the book"}</DialogTitle>
-  <DialogActions>
-    <Button onClick={handleReturnLoan}>{/* Translation */"Yes"}</Button>
-    <Button onClick={() => setReturnConfirmOpen(false)}>{/* Translation */"No"}</Button>
-  </DialogActions>
-</Dialog>
-      <Dialog open={reviewDialogOpen} onClose={() => setReviewDialogOpen(false)}>
-  <DialogTitle>{t('reviews.write_review')}</DialogTitle>
-  <DialogContent>
-    <form>
-      <TextField
-        label={t('reviews.rating')}
-        type="number"
-        InputProps={{ inputProps: { min: 0, max: 5 } }}
-        value={reviewRating}
-        onChange={(event) => setReviewRating(Number(event.target.value))}
-      />
-      <TextField
-        label={t('reviews.review')}
-        multiline
-        rows={4}
-        value={reviewContent}
-        onChange={(event) => setReviewContent(event.target.value)}
-      />
-    </form>
-  </DialogContent>
-  <DialogActions>
-    <Button onClick={handleSubmitReview}>{t('reviews.submit')}</Button>
-    <Button onClick={() => setReviewDialogOpen(false)}>{t('reviews.cancel')}</Button>
-  </DialogActions>
-</Dialog>
-  </div>
-);
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Choose Extension Duration</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Please choose the number of weeks to extend the loan.
+                    </DialogContentText>
+                    <Select
+                        value={extensionWeeks}
+                        onChange={(event) => setExtensionWeeks(event.target.value as number)}
+                    >
+                        <MenuItem value={1}>1 Week</MenuItem>
+                        <MenuItem value={2}>2 Weeks</MenuItem>
+                        <MenuItem value={3}>3 Weeks</MenuItem>
+                        <MenuItem value={4}>4 Weeks</MenuItem>
+                    </Select>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => handleExtendLoan(extensionWeeks)}>Extend Loan</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={returnConfirmOpen} onClose={() => setReturnConfirmOpen(false)}>
+                <DialogTitle>{/* Translation */"Please confirm you are returning the book"}</DialogTitle>
+                <DialogActions>
+                    <Button onClick={handleReturnLoan}>{/* Translation */"Yes"}</Button>
+                    <Button onClick={() => setReturnConfirmOpen(false)}>{/* Translation */"No"}</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={reviewDialogOpen} onClose={() => setReviewDialogOpen(false)}>
+                <DialogTitle>{t('reviews.write_review')}</DialogTitle>
+                <DialogContent>
+                    <form>
+                        <TextField
+                            label={t('reviews.rating')}
+                            type="number"
+                            InputProps={{inputProps: {min: 0, max: 5}}}
+                            value={reviewRating}
+                            onChange={(event) => setReviewRating(Number(event.target.value))}
+                        />
+                        <TextField
+                            label={t('reviews.review')}
+                            multiline
+                            rows={4}
+                            value={reviewContent}
+                            onChange={(event) => setReviewContent(event.target.value)}
+                        />
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSubmitReview}>{t('reviews.submit')}</Button>
+                    <Button onClick={() => setReviewDialogOpen(false)}>{t('reviews.cancel')}</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 
 }
 
-export default WithAuth(MyShelf);
+export default MyShelf;

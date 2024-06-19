@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import global_en from './translation/eng/global.json';
 import global_pl from './translation/pl/global.json';
+import global_es from './translation/esp/global.json';
 
 import li8next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
@@ -20,6 +21,9 @@ li8next.init({
     pl: {
       global: global_pl,
     },
+      es: {
+        global: global_es,
+      }
   },
 });
 
@@ -30,6 +34,7 @@ root.render(
   <React.StrictMode>
     <I18nextProvider i18n={li8next}>
         <App />
+
     </I18nextProvider>
   </React.StrictMode>
 );

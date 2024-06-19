@@ -24,6 +24,9 @@
   "book_details.no_details_avaible": "No Details Available",
   "reviews.rating": "Rating",
   "reviews.review": "Review",
+  "reviews.write_review": "How did you like it?",
+  "reviews.cancel": "Cancel",
+  "reviews.submit": "Submit",
   "reviews.user": "User",
   "my_shelf.author" : "Author",
   "my_shelf.title" : "Title",
@@ -35,6 +38,9 @@
   "home_page.welcome": "Library for you",
   "booksgrid.alert.loan_successful": "Book loan created",
   "booksgrid.alert.loan_fail": "Book loan failed",
-    "booksgrid.search_placeholder": "Search"
+    "booksgrid.search_placeholder": "Search",
+  "register.already_account":"Already have an account, log in!",
+  "login.no_account":"Not yet a reader? Sign up!"
+
 
 }

@@ -66,7 +66,11 @@ const BooksGrid = () => {
         return books;
     };
 
-// Then use this function when setting the books state
+    const filteredBooks = books.filter(book =>
+  book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (book.bookDetails && book.bookDetails.category.toLowerCase().includes(searchTerm.toLowerCase()))
+);
 
 
     useEffect(() => {
@@ -79,10 +83,6 @@ const BooksGrid = () => {
 
         fetchBooks();
     }, []);
-
-    const filteredBooks = books.filter(book =>
-        book && book.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
     const filledUpFilteredBooks = fillUpBooksArray(filteredBooks);
 
